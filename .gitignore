@@ -24,6 +24,7 @@
 *.w64
 *.wav
 *.wavex
+*.dylib
 .DS_Store
 .deps
 .dirstamp
@@ -32,6 +33,7 @@
 Build/
 CMake/config.h.in
 CMakeFiles
+CMakeScripts
 CMakeCache.txt
 Cfg
 Hack
