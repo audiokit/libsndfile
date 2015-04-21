@@ -25,6 +25,7 @@
 *.wav
 *.wavex
 *.dylib
+*.a
 .DS_Store
 .deps
 .dirstamp

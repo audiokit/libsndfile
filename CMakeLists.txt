@@ -187,8 +187,17 @@ set (libsndfile_sources
 add_library (sndfile SHARED
 	${libsndfile_sources}
 	)
+add_library (sndfile_static STATIC
+	${libsndfile_sources}
+	)
 
 target_link_libraries (sndfile m)
+
+set_target_properties(sndfile_static
+	PROPERTIES
+	VERSION ${LIB_VERSION_STRING}
+	ARCHIVE_OUTPUT_DIRECTORY src
+	)
 
 set_target_properties(sndfile
 	PROPERTIES
