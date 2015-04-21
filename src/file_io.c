@@ -64,6 +64,12 @@
 #define O_BINARY 0
 #endif
 
+#ifdef __APPLE__
+// For some reason unistd.h does not include these prototypes
+int ftruncate (int fildes, off_t length) ;
+int fsync (int fildes) ;
+#endif
+
 static void psf_log_syserr (SF_PRIVATE *psf, int error) ;
 
 #if (USE_WINDOWS_API == 0)

@@ -1,7 +1,7 @@
 #!/bin/bash
 # Build a universal dylib version of libsndfile for iOS
 
-if test $# -lt 2; then
+if test $# -lt 1; then
 	echo "Usage: $0 dynamic|static"
 	exit 1
 fi
@@ -29,9 +29,9 @@ echo "Building libsndfile.$EXT for iOS, config $BUILDCONF, style $STYLE ..."
 
 cmake . -G Xcode -DCMAKE_BUILD_TYPE=$BUILDCONF || exit 1
 
-xcodebuild -sdk iphoneos -xcconfig audiokit/device.xcconfig -target sndfile -configuration $BUILDCONF $FLAGS | xcpretty -c
+(xcodebuild -sdk iphoneos -xcconfig audiokit/device.xcconfig -target sndfile -configuration $BUILDCONF $FLAGS | xcpretty -c) || exit 1
 cp src/$BUILDCONF/libsndfile.1.$EXT audiokit/libsndfile-dev.$EXT
-xcodebuild -sdk iphonesimulator -xcconfig audiokit/simulator.xcconfig -target sndfile -configuration $BUILDCONF $FLAGS | xcpretty -c
+(xcodebuild -sdk iphonesimulator -xcconfig audiokit/simulator.xcconfig -target sndfile -configuration $BUILDCONF $FLAGS | xcpretty -c) || exit 1
 cp src/$BUILDCONF/libsndfile.1.$EXT audiokit/libsndfile-sim.$EXT
 
 # Combine architectures into the final library
