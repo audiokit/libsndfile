@@ -184,20 +184,33 @@ set (libsndfile_sources
 	src/xi.c
 	)
 
+if (APPLE)
+	add_library (sndfile_fwk SHARED
+		${libsndfile_sources}
+		)
+	add_library (sndfile_static STATIC
+		${libsndfile_sources}
+		)
+endif()
+
 add_library (sndfile SHARED
-	${libsndfile_sources}
-	)
-add_library (sndfile_static STATIC
 	${libsndfile_sources}
 	)
 
 target_link_libraries (sndfile m)
 
-set_target_properties(sndfile_static
-	PROPERTIES
-	VERSION ${LIB_VERSION_STRING}
-	ARCHIVE_OUTPUT_DIRECTORY src
+if (APPLE)
+	set_target_properties(sndfile_static
+		PROPERTIES
+		VERSION ${LIB_VERSION_STRING}
+		ARCHIVE_OUTPUT_DIRECTORY src
 	)
+	set_target_properties(sndfile_fwk
+		PROPERTIES FRAMEWORK YES
+		FRAMEWORK_VERSION ${LIB_VERSION_STRING} SOVERSION ${LIB_VERSION_MAJOR}
+		LIBRARY_OUTPUT_DIRECTORY src
+	)
+endif()
 
 set_target_properties(sndfile
 	PROPERTIES
