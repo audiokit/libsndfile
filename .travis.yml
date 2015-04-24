@@ -6,9 +6,10 @@ env:
 before_install:
 - gem install xcpretty
 - brew update
-- brew install autogen
+- brew install autogen cmake
 
 script:
-- cd audiokit && ./build-ios.sh static
-- cd audiokit && ./build-ios.sh dynamic
+- cd audiokit
+- ./build-ios.sh static
+- ./build-ios.sh dynamic
 
