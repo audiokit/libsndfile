@@ -33,15 +33,17 @@ cd ..
 
 cmake . -G Xcode -DCMAKE_BUILD_TYPE=$BUILDCONF || exit 1
 
-(xcodebuild -sdk iphoneos -xcconfig audiokit/device.xcconfig -target $TARGET -configuration $BUILDCONF | xcpretty -c) || exit 1
-cp src/$BUILDCONF/lib$TARGET$EXT audiokit/libsndfile-dev$EXT
 (xcodebuild -sdk iphonesimulator -xcconfig audiokit/simulator.xcconfig -target $TARGET -configuration $BUILDCONF | xcpretty -c) || exit 1
-cp src/$BUILDCONF/lib$TARGET$EXT audiokit/libsndfile-sim$EXT
+# In Travis CI, don't try to build the device library since we can't sign it
+test "$NOCOPY" == 1 && exit
+
+cp src/$BUILDCONF/lib$TARGET$EXT audiokit/libsndfile-sim$EXT || exit 2
+(xcodebuild -sdk iphoneos -xcconfig audiokit/device.xcconfig -target $TARGET -configuration $BUILDCONF | xcpretty -c) || exit 1
+cp src/$BUILDCONF/lib$TARGET$EXT audiokit/libsndfile-dev$EXT || exit 2
+
 
 # Combine architectures into the final library
-lipo -create audiokit/libsndfile-dev$EXT audiokit/libsndfile-sim$EXT -output audiokit/libsndfile$EXT
-
-test "$NOCOPY" == 1 && exit
+lipo -create audiokit/libsndfile-dev$EXT audiokit/libsndfile-sim$EXT -output audiokit/libsndfile$EXT || exit 3
 
 # Copy the file to the AudioKit image
 if test "$1" == "static";
