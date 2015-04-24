@@ -29,7 +29,7 @@ echo "Building libsndfile$EXT for iOS, config $BUILDCONF ..."
 cd ..
 ./autogen.sh
 ./autogen.sh cmake
-./configure
+./configure && exit 1
 
 cmake . -G Xcode -DCMAKE_BUILD_TYPE=$BUILDCONF || exit 1
 
