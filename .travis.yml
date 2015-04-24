@@ -10,6 +10,6 @@ before_install:
 
 script:
 - cd audiokit
-- ./build-ios.sh static
-- ./build-ios.sh dynamic
+- bash -x ./build-ios.sh static
+- bash -x ./build-ios.sh dynamic
 
