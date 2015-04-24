@@ -41,6 +41,8 @@ cp src/$BUILDCONF/lib$TARGET$EXT audiokit/libsndfile-sim$EXT
 # Combine architectures into the final library
 lipo -create audiokit/libsndfile-dev$EXT audiokit/libsndfile-sim$EXT -output audiokit/libsndfile$EXT
 
+test "$NOCOPY" == 1 && exit
+
 # Copy the file to the AudioKit image
 if test "$1" == "static";
 then
