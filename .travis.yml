@@ -6,7 +6,7 @@ env:
 before_install:
 - gem install xcpretty
 - brew update
-- brew install autogen cmake
+- brew install autogen
 
 script:
 - cd audiokit
