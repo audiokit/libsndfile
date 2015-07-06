@@ -1,15 +1,14 @@
 language: objective-c
-
 env:
 - LANG=en_US.UTF-8 LC_CTYPE=en_US.UTF-8 NOCOPY=1
-
 before_install:
 - gem install xcpretty
 - brew update
 - brew install autogen
-
 script:
 - cd audiokit
 - bash -x ./build-ios.sh static
 - bash -x ./build-ios.sh dynamic
-
+notifications:
+  slack:
+    secure: Hx9dbJsf4EVe1zBDLVo7ENTWVw009U9xjJFB+jlP+sv+DI0zqJGdWZx4DLb6uVE9ZXRgngXFE4V/pqj/nyaX9c+1Nd6h3OlIjg2OHYGxrtrD5z8DuIWEXaqLrIZ7TKDO79z+f539j8OHhOrYUDYfHAxg5RWuuVB/7kLYaZuZuFw=
