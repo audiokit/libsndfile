@@ -67,6 +67,8 @@ examples/sndfilehandle
 libsndfile-1.0.*
 libsndfile-testsuite-*
 libsndfile.spec
+libsndfile.build
+libsndfile.xcodeproj
 libtool
 man/sndfile-deinterleave.1
 man/sndfile-metadata-set.1
