@@ -1,6 +1,8 @@
 
 include (CMake/check.cmake)
 
+check_c_compiler_flag (-fembed-bitcode 		HAS_EMBED_BITCODE)
+
 lsf_check_include_file (alsa/asoundlib.h	HAVE_ALSA_ASOUNDLIB_H)
 lsf_check_include_file (byteswap.h			HAVE_BYTESWAP_H)
 lsf_check_include_file (dlfcn.h				HAVE_DLFCN_H)

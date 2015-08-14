@@ -13,6 +13,9 @@ fi
 # Default: AudioKit in the same parent directory as libsndfile
 AK_ROOT=${AK_ROOT:-$PWD/../../AudioKit/AudioKit/Platforms/iOS}
 
+XCPRETTY="xcpretty -c"
+#XCPRETTY=cat
+
 BUILDCONF=${BUILDCONF:-Release}
 if test "$1" == "static";
 then
@@ -33,12 +36,12 @@ cd ..
 
 cmake . -G Xcode -DCMAKE_BUILD_TYPE=$BUILDCONF || exit 1
 
-(xcodebuild -sdk iphonesimulator -xcconfig audiokit/simulator.xcconfig -target $TARGET -configuration $BUILDCONF | xcpretty -c) || exit 1
+(xcodebuild -sdk iphonesimulator -xcconfig audiokit/simulator.xcconfig -target $TARGET -configuration $BUILDCONF | $XCPRETTY) || exit 1
 # In Travis CI, don't try to build the device library since we can't sign it
 test "$NOCOPY" == 1 && exit
 
 cp src/$BUILDCONF/lib$TARGET$EXT audiokit/libsndfile-sim$EXT || exit 2
-(xcodebuild -sdk iphoneos -xcconfig audiokit/device.xcconfig -target $TARGET -configuration $BUILDCONF | xcpretty -c) || exit 1
+(xcodebuild -sdk iphoneos -xcconfig audiokit/device.xcconfig -target $TARGET -configuration $BUILDCONF | $XCPRETTY) || exit 1
 cp src/$BUILDCONF/lib$TARGET$EXT audiokit/libsndfile-dev$EXT || exit 2
 
 

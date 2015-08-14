@@ -3,6 +3,7 @@ include (CheckIncludeFile)
 include (CheckLibraryExists)
 include (CheckTypeSize)
 include (TestBigEndian)
+include (CheckCCompilerFlag)
 
 function (lsf_try_compile_c_result c_file result_name result_pass result_fail)
 	try_compile (compile_result

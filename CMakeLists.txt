@@ -191,6 +191,9 @@ if (APPLE)
 	add_library (sndfile_static STATIC
 		${libsndfile_sources}
 		)
+	if (HAS_EMBED_BITCODE)
+		set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fembed-bitcode")
+	endif()
 endif()
 
 add_library (sndfile SHARED
