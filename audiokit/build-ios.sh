@@ -11,7 +11,8 @@ if test $# -lt 1; then
 fi
 
 # Default: AudioKit in the same parent directory as libsndfile
-AK_ROOT=${AK_ROOT:-$PWD/../../AudioKit/AudioKit/Platforms/iOS}
+AK_ROOT=${AK_ROOT:-$PWD/../../AudioKit}
+AK_ROOT=${AK_ROOT}/AudioKit/Platforms/iOS
 
 XCPRETTY="xcpretty -c"
 #XCPRETTY=cat
